@@ -1,3 +1,4 @@
+
 return {
   snippets = { preset = "luasnip" },
   cmdline = { enabled = true },
@@ -6,7 +7,7 @@ return {
   sources = { default = { "lsp", "snippets", "buffer", "path" } },
 
   keymap = {
-    preset = "default",
+    preset = "super-tab",
     ["<CR>"] = { "accept", "fallback" },
     ["<C-b>"] = { "scroll_documentation_up", "fallback" },
     ["<C-f"] = { "scroll_documentation_down", "fallback" },
@@ -15,7 +16,7 @@ return {
   completion = {
     ghost_text = { enabled = true },
     documentation = {
-      auto_show = true,
+      auto_show = false,
       auto_show_delay_ms = 200,
       window = { border = "single" },
     },

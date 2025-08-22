@@ -1,6 +1,7 @@
 require "options"
 require "mappings"
 require "commands"
+require "autocmds"
 
 -- bootstrap plugins & lazy.nvim
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim" -- path where its going to be installed
@@ -22,4 +23,6 @@ local plugins = require "plugins"
 
 require("lazy").setup(plugins, require "lazy_config")
 
-vim.cmd "colorscheme nightfox"
+-- vim.cmd "colorscheme nightfox"
+vim.cmd.colorscheme 'tokyonight-night'
+
