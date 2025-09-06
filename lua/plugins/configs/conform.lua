@@ -1,6 +1,27 @@
 return {
   formatters_by_ft = {
+    svelte = { "svelte_fmt" },
     lua = { "stylua" },
-    javascript = { "prettier" },
+    c = { "clang-format" },
+    cs = { "clang-format" },
+    cpp = { "clang-format" },
+    java = { "clang-format" },
+    sql = { "sql_formatter" },
+
+
+    -- webdev
+    javascript = { "biome" },
+    javascriptreact = { "biome" },
+    typescript = { "biome" },
+    typescriptreact = { "biome" },
+    vue = { "prettier" },
+
+    css = { "biome" },
+    html = { "prettier" },
+    json = { "biome" },
+    jsonc = { "biome" },
+
+    sh = { "shfmt" },
+    yaml = { "yamlfmt" },
   },
 }

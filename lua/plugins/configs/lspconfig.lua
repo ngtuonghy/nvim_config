@@ -83,6 +83,19 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
+  tailwindcss = {
+    settings = {
+      tailwindCSS = {
+        experimental = {
+          classRegex = {
+            { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]" },
+          },
+        },
+      },
+    },
+  },
+  astro = {},
+  angularls = {},
   pyright = {},
   vtsls = {
     filetypes = {
@@ -158,3 +171,15 @@ require("mason-lspconfig").setup {
     end,
   },
 }
+
+require('lspconfig').tailwindcss.setup({
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]" }
+        },
+      },
+    },
+  },
+})
