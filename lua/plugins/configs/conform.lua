@@ -1,12 +1,13 @@
 return {
   formatters_by_ft = {
-    svelte = { "svelte_fmt" },
+    svelte = { "prettier" },
     lua = { "stylua" },
     c = { "clang-format" },
     cs = { "clang-format" },
     cpp = { "clang-format" },
     java = { "clang-format" },
     sql = { "sql_formatter" },
+    python = { "autopep8" },
 
 
     -- webdev
@@ -19,6 +20,7 @@ return {
     css = { "biome" },
     html = { "prettier" },
     json = { "biome" },
+    astro = { "biome" },
     jsonc = { "biome" },
 
     sh = { "shfmt" },

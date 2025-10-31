@@ -5,6 +5,7 @@ return {
   appearance = { nerd_font_variant = "normal" },
   fuzzy = { implementation = "prefer_rust" },
   sources = { default = { "lsp", "snippets", "buffer", "path" } },
+   signature = { enabled = true },
 
   keymap = {
     preset = "super-tab",

@@ -96,7 +96,7 @@ local servers = {
   },
   astro = {},
   angularls = {},
-  pyright = {},
+
   vtsls = {
     filetypes = {
       "javascript",
@@ -118,6 +118,27 @@ local servers = {
               configNamespace = "typescript",
               enableForWorkspaceTypeScriptVersions = true,
             },
+          },
+        },
+      },
+    },
+  },
+
+  basedpyright = {
+    settings = {
+      basedpyright = {
+        analysis = {
+          diagnosticMode = "openFilesOnly",
+          typeCheckingMode = "basic",
+          capabilities = capabilities,
+          useLibraryCodeForTypes = true,
+          diagnosticSeverityOverrides = {
+            autoSearchPaths = true,
+            enableTypeIgnoreComments = false,
+            reportGeneralTypeIssues = "none",
+            reportArgumentType = "none",
+            reportUnknownMemberType = "none",
+            reportAssignmentType = "none",
           },
         },
       },
@@ -157,29 +178,54 @@ vim.list_extend(ensure_installed, {
 })
 require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
-require("mason-lspconfig").setup {
-  ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-  automatic_installation = false,
-  handlers = {
-    function(server_name)
-      local server = servers[server_name] or {}
-      -- This handles overriding only values explicitly passed
-      -- by the server configuration above. Useful when disabling
-      -- certain features of an LSP (for example, turning off formatting for ts_ls)
-      server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-      require("lspconfig")[server_name].setup(server)
-    end,
+-- require("mason-lspconfig").setup {
+--   ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+--   automatic_installation = false,
+--   handlers = {
+--     function(server_name)
+--       local server = servers[server_name] or {}
+--       -- This handles overriding only values explicitly passed
+--       -- by the server configuration above. Useful when disabling
+--       -- certain features of an LSP (for example, turning off formatting for ts_ls)
+--       server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+--       require("lspconfig")[server_name].setup(server)
+--     end,
+--   },
+-- }
+for server_name, server_config in pairs(servers) do
+  require("lspconfig")[server_name].setup(server_config)
+end
+
+require("lspconfig").tailwindcss.setup {
+  settings = {
+    tailwindCSS = {
+      classFunctions = { "cva", "cx" },
+      -- experimental = {
+      --   classRegex = {
+      -- { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]" },
+      -- },
+      -- },
+    },
   },
 }
 
-require('lspconfig').tailwindcss.setup({
+require("lspconfig").basedpyright.setup {
   settings = {
-    tailwindCSS = {
-      experimental = {
-        classRegex = {
-          { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]" }
+    basedpyright = {
+      analysis = {
+        diagnosticMode = "openFilesOnly",
+        typeCheckingMode = "basic",
+        capabilities = capabilities,
+        useLibraryCodeForTypes = true,
+        diagnosticSeverityOverrides = {
+          autoSearchPaths = true,
+          enableTypeIgnoreComments = false,
+          reportGeneralTypeIssues = "none",
+          reportArgumentType = "none",
+          reportUnknownMemberType = "none",
+          reportAssignmentType = "none",
         },
       },
     },
   },
-})
+}

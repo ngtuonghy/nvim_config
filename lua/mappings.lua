@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+vim.g.maplocalleader = ","
 
 -- general mappings
 map("n", "<C-s>", "<cmd> w <CR>")
